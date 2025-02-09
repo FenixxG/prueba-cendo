@@ -3,13 +3,18 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { UserPlus, FileText, CheckSquare, Upload, Menu } from "lucide-react"
+
+import { HiUserAdd } from "react-icons/hi";
+import { FaFileAlt } from "react-icons/fa";
+import { FaFileCircleCheck } from "react-icons/fa6";
+import { MdOutlineFileUpload } from "react-icons/md";
+import { IoMenu } from "react-icons/io5";
 
 const menuItems = [
-    { icon: UserPlus, text: "Registrar Usuario", href: "/register-user" },
-    { icon: FileText, text: "Documentos Pendientes", href: "/pending-documents" },
-    { icon: CheckSquare, text: "Documentos Aprobados", href: "/approved-documents" },
-    { icon: Upload, text: "Subir Documentos", href: "/upload-documents" },
+    { icon: HiUserAdd, text: "Registrar Usuario", href: "/register-user" },
+    { icon: FaFileAlt, text: "Documentos Pendientes", href: "/pending-documents" },
+    { icon: FaFileCircleCheck, text: "Documentos Aprobados", href: "/approved-documents" },
+    { icon: MdOutlineFileUpload, text: "Subir Documentos", href: "/upload-documents" },
 ]
 
 export function Sidebar() {
@@ -27,7 +32,7 @@ export function Sidebar() {
             <div className="flex justify-between items-center p-4">
                 <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "w-40" : "w-0"}`}>
                     <Image
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/XPLLOGO-BXvX0flISRBU9JUdjWJGkjoHc0HVoQ.png"
+                        src="/assets/img/palmerola-logo.png"
                         alt="Palmerola International Airport Logo"
                         width={150}
                         height={56}
@@ -40,7 +45,7 @@ export function Sidebar() {
                     className="p-2 rounded-md hover:bg-[#2a2a3e] transition-colors duration-200"
                     aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
                 >
-                    <Menu size={24} />
+                    <IoMenu size={24} />
                 </button>
             </div>
             <nav className="mt-8 flex-grow">

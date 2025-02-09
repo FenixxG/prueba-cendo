@@ -1,8 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { Sidebar } from "@/components/Sidebar"
-import { Menu } from "lucide-react"
+import { Sidebar } from "@/layout/AdminLayout/Sidebar"
+import { IoMenu } from "react-icons/io5";
 
 export default function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
@@ -18,7 +18,7 @@ export default function Dashboard() {
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               className="p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 lg:hidden"
             >
-              <Menu size={24} />
+              <IoMenu size={24} />
             </button>
           </div>
         </header>
