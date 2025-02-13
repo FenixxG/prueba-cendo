@@ -1,224 +1,493 @@
-// Sidebar.tsx
-import React, { useEffect, useState } from 'react';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+// import React, { useEffect, useState } from 'react';
+// import classNames from 'classnames';
+// import { Button } from 'react-bootstrap';
+// import SidebarNav from './SidebarNav';
+// import Image from 'next/image';
+// import { useRouter } from 'next/router';
+
+// export default function Sidebar(props: { isShow: boolean; isShowMd: boolean }) {
+//   const { isShow, isShowMd } = props;
+//   const [isNarrow, setIsNarrow] = useState(false);
+
+//   const router = useRouter();
+
+//   const toggleIsNarrow = () => {
+//     const newValue = !isNarrow;
+//     localStorage.setItem('isNarrow', newValue ? 'true' : 'false');
+//     setIsNarrow(newValue);
+//   };
+
+//   // On first time load only
+//   useEffect(() => {
+//     if (localStorage.getItem('isNarrow')) {
+//       setIsNarrow(localStorage.getItem('isNarrow') === 'true');
+//     }
+//   }, [setIsNarrow]);
+
+//   return (
+//     <div
+//       className={classNames('sidebar d-flex flex-column position-fixed h-100', {
+//         'sidebar-narrow': isNarrow,
+//         show: isShow,
+//         'md-hide': !isShowMd,
+//       })}
+//       id='sidebar'>
+//       <div className="sidebar-brand d-none d-md-flex align-items-center justify-content-center">
+//       <Image
+//               width={200}
+//               height={100}
+//               className="rounded-circle"
+//               src="/assets/img/logo_pia_blanco.png"
+//               alt="user@email.com"
+//             />
+//       </div>
+
+//       <div className='sidebar-nav flex-fill'>
+//         <SidebarNav />
+//       </div>
+
+//       <Button
+//         variant="link"
+//         className="sidebar-toggler d-none d-md-inline-block rounded-0 text-end pe-4 fw-bold shadow-none"
+//         onClick={toggleIsNarrow}
+//         type="button"
+//         aria-label="sidebar toggler"
+//       >
+//         <FontAwesomeIcon className="sidebar-toggler-chevron" icon={faAngleLeft} fontSize={24} />
+//       </Button>
+//     </div>
+//   )
+// }
+
+// export const SidebarOverlay = (props: { isShowSidebar: boolean; toggleSidebar: () => void }) => {
+//   const { isShowSidebar, toggleSidebar } = props;
+
+//   return (
+//     <div
+//       tabIndex={-1}
+//       aria-hidden
+//       className={classNames('sidebar-overlay position-fixed top-0 bg-dark w-100 h-100 opacity-50', {
+//         'd-none': !isShowSidebar,
+//       })}
+//       onClick={toggleSidebar}
+//     />
+//   );
+// };
+
+
+// TODO EN UNO
+
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { IconDefinition } from '@fortawesome/free-regular-svg-icons';
+// import {
+//   faAngleLeft,
+//   faChevronUp,
+//   faFile,
+//   faUserPlus,
+//   faFileClipboard,
+//   faFileUpload,
+// } from '@fortawesome/free-solid-svg-icons';
+// import React, { PropsWithChildren, useContext, useEffect, useState } from 'react';
+// import { Accordion, AccordionContext, Button, Nav, useAccordionButton } from 'react-bootstrap';
+// import classNames from 'classnames';
+// import Link from 'next/link';
+// import Image from 'next/image';
+// import { useRouter } from 'next/router';
+
+// // Componente principal del Sidebar
+// export default function Sidebar(props: { isShow: boolean; isShowMd: boolean }) {
+//   const { isShow, isShowMd } = props;
+//   const [isNarrow, setIsNarrow] = useState(false);
+//   const router = useRouter();
+
+//   const toggleIsNarrow = () => {
+//     const newValue = !isNarrow;
+//     localStorage.setItem('isNarrow', newValue ? 'true' : 'false');
+//     setIsNarrow(newValue);
+//   };
+
+//   useEffect(() => {
+//     if (localStorage.getItem('isNarrow')) {
+//       setIsNarrow(localStorage.getItem('isNarrow') === 'true');
+//     }
+//   }, [setIsNarrow]);
+
+//   return (
+//     <div
+//       className={classNames('sidebar d-flex flex-column position-fixed h-100', {
+//         'sidebar-narrow': isNarrow,
+//         show: isShow,
+//         'md-hide': !isShowMd,
+//       })}
+//       id='sidebar'>
+
+//       <div className='sidebar-nav flex-fill'>
+//         <SidebarNavContent />
+//       </div>
+
+//       <Button
+//         variant="link"
+//         className="sidebar-toggler d-none d-md-inline-block rounded-0 text-end pe-4 fw-bold shadow-none"
+//         onClick={toggleIsNarrow}
+//         type="button"
+//         aria-label="sidebar toggler"
+//       >
+//         <FontAwesomeIcon className="sidebar-toggler-chevron" icon={faAngleLeft} fontSize={24} />
+//       </Button>
+//     </div>
+//   )
+// }
+
+// // Componente Overlay
+// export const SidebarOverlay = (props: { isShowSidebar: boolean; toggleSidebar: () => void }) => {
+//   const { isShowSidebar, toggleSidebar } = props;
+
+//   return (
+//     <div
+//       tabIndex={-1}
+//       aria-hidden
+//       className={classNames('sidebar-overlay position-fixed top-0 bg-dark w-100 h-100 opacity-50', {
+//         'd-none': !isShowSidebar,
+//       })}
+//       onClick={toggleSidebar}
+//     />
+//   );
+// };
+
+// // Componentes de navegación
+// type SidebarNavItemProps = {
+//   href: string;
+//   icon?: IconDefinition;
+// } & PropsWithChildren;
+
+// const SidebarNavItem = (props: SidebarNavItemProps) => {
+//   const { icon, children, href } = props;
+
+//   return (
+//     <Nav.Item>
+//       <Link href={href} passHref legacyBehavior>
+//         <Nav.Link className='px-3 py-2 d-flex align-items-center'>
+//           {icon ? <FontAwesomeIcon className='nav-icon ms-n3' icon={icon} /> : <span className='nav-icon ms-n3' />}
+//           {children}
+//         </Nav.Link>
+//       </Link>
+//     </Nav.Item>
+//   );
+// };
+
+// const SidebarNavTitle = (props: PropsWithChildren) => {
+//   const { children } = props;
+//   return <li className='nav-title px-3 py-2 mt-3 text-uppercase fw-bold'>{children}</li>;
+// };
+
+// type SidebarNavGroupToggleProps = {
+//   eventKey: string;
+//   icon: IconDefinition;
+//   setIsShow: (isShow: boolean) => void;
+// } & PropsWithChildren;
+
+// const SidebarNavGroupToggle = (props: SidebarNavGroupToggleProps) => {
+//   const { activeEventKey } = useContext(AccordionContext);
+//   const { eventKey, icon, children, setIsShow } = props;
+//   const decoratedOnClick = useAccordionButton(eventKey);
+//   const isCurrentEventKey = activeEventKey === eventKey;
+
+//   useEffect(() => {
+//     setIsShow(activeEventKey === eventKey);
+//   }, [activeEventKey, eventKey, setIsShow]);
+
+//   return (
+//     <Button
+//       variant='link'
+//       type='button'
+//       className={classNames('rounded-0 nav-link px-3 py-2 d-flex align-items-center flex-fill w-100 shadow-none', {
+//         collapsed: !isCurrentEventKey,
+//       })}
+//       onClick={decoratedOnClick}>
+//       <FontAwesomeIcon className='nav-icon ms-n3' icon={icon} />
+//       {children}
+//       <div className='nav-chevron ms-auto text-end'>
+//         <FontAwesomeIcon size='xs' icon={faChevronUp} />
+//       </div>
+//     </Button>
+//   );
+// };
+
+// type SidebarNavGroupProps = {
+//   toggleIcon: IconDefinition;
+//   toggleText: string;
+// } & PropsWithChildren;
+
+// const SidebarNavGroup = (props: SidebarNavGroupProps) => {
+//   const { toggleIcon, toggleText, children } = props;
+//   const [isShow, setIsShow] = useState(false);
+
+//   return (
+//     <Accordion as='li' bsPrefix='nav-group' className={classNames({ show: isShow })}>
+//       <SidebarNavGroupToggle icon={toggleIcon} eventKey='0' setIsShow={setIsShow}>
+//         {toggleText}
+//       </SidebarNavGroupToggle>
+//       <Accordion.Collapse eventKey='0'>
+//         <ul className='nav-group-items list-unstyled'>{children}</ul>
+//       </Accordion.Collapse>
+//     </Accordion>
+//   );
+// };
+
+// // Contenido principal de navegación
+// const SidebarNavContent = () => {
+//   const [userRole, setUserRole] = useState('');
+
+//   useEffect(() => {
+//     if (typeof window !== 'undefined') {
+//       const role = localStorage.getItem('role');
+//       setUserRole(role || '');
+//     }
+//   }, []);
+
+//   return (
+//     <ul className='list-unstyled'>
+//       <div className='d-flex justify-content-center align-items-center'>
+//         <Link href='/home'>
+//           <Image
+//             className='rounded-circle'
+//             style={{ width: '100px', height: '100px', position: 'relative' }}
+//             layout="responsive"
+//             height={100}
+//             width={200}
+//             src='/assets/img/logo_pia_blanco.png'
+//             alt='user@email.com'
+//           />
+//         </Link>
+//       </div>
+
+//       <ul className='list-unstyled'>
+//         {userRole === 'ADM' && (
+//           <>
+//             <SidebarNavItem icon={faFile} href='/docspendientes'>
+//               Creación de Registro
+//             </SidebarNavItem>
+//             <SidebarNavItem icon={faFileClipboard} href='/tipodoc'>
+//               Tipo de Formato
+//             </SidebarNavItem>
+//             <SidebarNavItem icon={faUserPlus} href='/aggusuario'>
+//               Agregar Usuario
+//             </SidebarNavItem>
+//             <SidebarNavItem icon={faFileUpload} href='/historico'>
+//               Archivos Cargados
+//             </SidebarNavItem>
+//           </>
+//         )}
+//         {userRole === 'AUG' && (
+//           <SidebarNavItem icon={faFileUpload} href='/historico'>
+//             Archivos Cargados
+//           </SidebarNavItem>
+//         )}
+//         {userRole !== 'ADM' && userRole !== 'AUG' && (
+//           <>
+//             <SidebarNavItem icon={faFile} href='/docspendientes'>
+//               Creación de Registro
+//             </SidebarNavItem>
+//             <SidebarNavItem icon={faFileClipboard} href='/tipodoc'>
+//               Tipo de Formato
+//             </SidebarNavItem>
+//             <SidebarNavItem icon={faFileUpload} href='/historico'>
+//               Archivos Cargados
+//             </SidebarNavItem>
+//           </>
+//         )}
+//       </ul>
+//     </ul>
+//   );
+// };
+
+// TAILWIND
+import React, { PropsWithChildren, useEffect, useState } from 'react';
+import classNames from 'classnames';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import classNames from 'classnames';
-import {
-  FaAngleLeft,
-  FaChevronUp,
-  FaFile,
-  FaUserPlus,
-  FaClipboardList,
-  FaFileUpload,
+import { 
+  FaAngleLeft, 
+  FaChevronUp, 
+  FaFile, 
+  FaUserPlus, 
+  FaFileAlt, 
+  FaUpload,
+  FaHome
 } from 'react-icons/fa';
 
-/* ======================================================
-   Hook para manejar valores en el localStorage
-   ====================================================== */
-function useLocalStorage(key: string, initialValue: string = ''): [string, (val: string) => void] {
-  const [storedValue, setStoredValue] = useState(initialValue);
+export default function Sidebar(props: { isShow: boolean; isShowMd: boolean }) {
+  const { isShow, isShowMd } = props;
+  const [isNarrow, setIsNarrow] = useState(false);
+  const router = useRouter();
 
-  useEffect(() => {
-    const value = localStorage.getItem(key);
-    if (value !== null) {
-      setStoredValue(value);
-    }
-  }, [key]);
-
-  const setValue = (val: string) => {
-    localStorage.setItem(key, val);
-    setStoredValue(val);
+  const toggleIsNarrow = () => {
+    const newValue = !isNarrow;
+    localStorage.setItem('isNarrow', newValue ? 'true' : 'false');
+    setIsNarrow(newValue);
   };
 
-  return [storedValue, setValue];
+  useEffect(() => {
+    const storedValue = localStorage.getItem('isNarrow');
+    if (storedValue) setIsNarrow(storedValue === 'true');
+  }, []);
+
+  return (
+    <div className={classNames(
+      'flex flex-col fixed h-full bg-gray-800 text-white transition-all duration-300 z-30',
+      {
+        'w-64': !isNarrow,
+        'w-20': isNarrow,
+        'left-0': isShow,
+        '-left-full': !isShow,
+        'md:left-0': isShowMd,
+        'md:-left-full': !isShowMd
+      }
+    )}>
+      <div className="flex-1 overflow-y-auto">
+        <SidebarNavContent isNarrow={isNarrow} />
+      </div>
+
+      <button
+        onClick={toggleIsNarrow}
+        className="hidden md:inline-block absolute -right-5 top-1/2 bg-gray-800 p-2 rounded-r-full hover:bg-gray-700 transition-colors"
+        aria-label="Toggle sidebar"
+      >
+        <FaAngleLeft className={`text-xl transition-transform ${isNarrow ? 'rotate-180' : ''}`} />
+      </button>
+    </div>
+  )
 }
 
-/* ======================================================
-   Configuración de navegación según el rol del usuario
-   ====================================================== */
-type NavItem = {
-  label: string;
-  icon: React.ReactNode;
-  href: string;
+export const SidebarOverlay = (props: { isShowSidebar: boolean; toggleSidebar: () => void }) => {
+  return (
+    <div
+      onClick={props.toggleSidebar}
+      className={classNames(
+        'fixed inset-0 bg-black/50 z-20 transition-opacity',
+        { 'hidden opacity-0': !props.isShowSidebar, 'opacity-100': props.isShowSidebar }
+      )}
+    />
+  );
 };
 
-const navConfig: Record<string, NavItem[]> = {
-  ADM: [
-    { label: 'Creación de Registro', icon: <FaFile />, href: '/docspendientes' },
-    { label: 'Tipo de Formato', icon: <FaClipboardList />, href: '/tipodoc' },
-    { label: 'Agregar Usuario', icon: <FaUserPlus />, href: '/aggusuario' },
-    { label: 'Archivos Cargados', icon: <FaFileUpload />, href: '/historico' },
-  ],
-  AUG: [
-    { label: 'Archivos Cargados', icon: <FaFileUpload />, href: '/historico' },
-  ],
-  DEFAULT: [
-    { label: 'Creación de Registro', icon: <FaFile />, href: '/docspendientes' },
-    { label: 'Tipo de Formato', icon: <FaClipboardList />, href: '/tipodoc' },
-    { label: 'Archivos Cargados', icon: <FaFileUpload />, href: '/historico' },
-  ],
-};
-
-/* ======================================================
-   Componente para un item de navegación
-   ====================================================== */
-interface SidebarNavItemProps {
+type SidebarNavItemProps = {
   href: string;
-  icon: React.ReactNode;
-  label: string;
-}
+  icon?: React.ReactNode;
+} & PropsWithChildren;
 
-const SidebarNavItem: React.FC<SidebarNavItemProps> = ({ href, icon, label }) => (
-  <li>
-    <Link href={href}>
-      <a className="flex items-center px-3 py-2 hover:bg-gray-700 transition-colors">
-        <span className="mr-2 text-lg">{icon}</span>
-        <span>{label}</span>
-      </a>
-    </Link>
-  </li>
-);
+const SidebarNavItem = (props: SidebarNavItemProps) => {
+  const { icon, children, href } = props;
+  const router = useRouter();
 
-/* ======================================================
-   Componente opcional para grupos de navegación (Accordion)
-   ====================================================== */
-interface SidebarNavGroupProps {
-  toggleIcon: React.ReactNode;
-  toggleLabel: string;
-  children: React.ReactNode;
-}
-
-const SidebarNavGroup: React.FC<SidebarNavGroupProps> = ({ toggleIcon, toggleLabel, children }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const isActive = router.pathname === href;
 
   return (
     <li>
-      <button
-        type="button"
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between px-3 py-2 hover:bg-gray-700 transition-colors"
-      >
-        <div className="flex items-center">
-          <span className="mr-2 text-lg">{toggleIcon}</span>
-          <span>{toggleLabel}</span>
-        </div>
-        <FaChevronUp
-          className={classNames('transition-transform duration-200', {
-            'rotate-0': isOpen,
-            'rotate-180': !isOpen,
-          })}
-        />
-      </button>
-      {isOpen && <ul className="pl-4">{children}</ul>}
+      <Link href={href} className={classNames(
+        'flex items-center px-4 py-3 hover:bg-gray-700 transition-colors',
+        { 'bg-gray-900': isActive }
+      )}>
+        {icon && <span className="mr-4 text-xl">{icon}</span>}
+        <span className="whitespace-nowrap">{children}</span>
+      </Link>
     </li>
   );
 };
 
-/* ======================================================
-   Componente de navegación lateral
-   ====================================================== */
-const SidebarNav: React.FC = () => {
-  // Obtenemos el rol del usuario desde localStorage (si no existe, se usa "DEFAULT")
-  const [userRole] = useLocalStorage('role', 'DEFAULT');
-  const items = navConfig[userRole] || navConfig['DEFAULT'];
+type SidebarNavGroupProps = {
+  icon: React.ReactNode;
+  title: string;
+} & PropsWithChildren;
 
+const SidebarNavGroup = (props: SidebarNavGroupProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  
   return (
-    <nav>
-      <ul className="space-y-1">
-        {/* Logo centralizado */}
-        <li className="flex justify-center mb-3">
-          <Link href="/home">
-            <a>
-              <Image
-                className="rounded-full"
-                src="/assets/img/logo_pia_blanco.png"
-                alt="Logo"
-                width={100}
-                height={100}
-              />
-            </a>
-          </Link>
-        </li>
-        {/* Renderizado de items de navegación */}
-        {items.map((item) => (
-          <SidebarNavItem key={item.href} href={item.href} icon={item.icon} label={item.label} />
-        ))}
-        {/* Ejemplo de grupo de navegación (opcional)
-        <SidebarNavGroup toggleIcon={<FaFile />} toggleLabel="Grupo de Ejemplo">
-          <SidebarNavItem href="/subitem1" icon={<FaFile />} label="Subitem 1" />
-          <SidebarNavItem href="/subitem2" icon={<FaClipboardList />} label="Subitem 2" />
-        </SidebarNavGroup>
-        */}
+    <li>
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center px-4 py-3 hover:bg-gray-700 transition-colors"
+      >
+        <span className="mr-4 text-xl">{props.icon}</span>
+        <span className="flex-1 text-left whitespace-nowrap">{props.title}</span>
+        <FaChevronUp className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+      
+      <ul className={classNames(
+        'overflow-hidden transition-all',
+        { 'max-h-0': !isOpen, 'max-h-96': isOpen }
+      )}>
+        {props.children}
       </ul>
-    </nav>
+    </li>
   );
 };
 
-/* ======================================================
-   Componente principal del Sidebar
-   ====================================================== */
-interface SidebarProps {
-  isShow: boolean;
-  isShowMd: boolean;
-}
+const SidebarNavContent = ({ isNarrow }: { isNarrow: boolean }) => {
+  const [userRole, setUserRole] = useState('');
 
-export default function Sidebar({ isShow, isShowMd }: SidebarProps) {
-  const router = useRouter();
-  const [isNarrow, setIsNarrow] = useLocalStorage('isNarrow', 'false');
-  const narrow = isNarrow === 'true';
-
-  const toggleIsNarrow = () => {
-    setIsNarrow(narrow ? 'false' : 'true');
-  };
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setUserRole(localStorage.getItem('role') || '');
+    }
+  }, []);
 
   return (
-    <aside
-      className={classNames(
-        "fixed top-0 left-0 h-full bg-gray-800 text-white flex flex-col transition-all duration-300",
-        {
-          // Ejemplo de ancho: ajusta según tus necesidades
-          "w-20": narrow,
-          "w-64": !narrow,
-          // Control de visibilidad
-          "hidden": !isShow,
-          "md:hidden": !isShowMd,
-        }
-      )}
-      id="sidebar"
-    >
-      <div className="flex-grow overflow-y-auto">
-        <SidebarNav />
+    <ul className="py-4">
+      <li className="mb-8 px-4">
+        <Link href="/home" className="flex justify-center">
+          <Image
+            src="/assets/img/logo_pia_blanco.png"
+            alt="Logo"
+            width={isNarrow ? 60 : 100}
+            height={isNarrow ? 60 : 100}
+            className="rounded-full transition-all"
+          />
+        </Link>
+      </li>
+
+      <div className="space-y-2">
+        {userRole === 'ADM' && (
+          <>
+            <SidebarNavItem href="/docspendientes" icon={<FaFile />}>
+              Creación de Registro
+            </SidebarNavItem>
+            <SidebarNavItem href="/tipodoc" icon={<FaFileAlt />}>
+              Tipo de Formato
+            </SidebarNavItem>
+            <SidebarNavItem href="/aggusuario" icon={<FaUserPlus />}>
+              Agregar Usuario
+            </SidebarNavItem>
+            <SidebarNavItem href="/historico" icon={<FaUpload />}>
+              Archivos Cargados
+            </SidebarNavItem>
+          </>
+        )}
+
+        {userRole === 'AUG' && (
+          <SidebarNavItem href="/historico" icon={<FaUpload />}>
+            Archivos Cargados
+          </SidebarNavItem>
+        )}
+
+        {!['ADM', 'AUG'].includes(userRole) && (
+          <>
+            <SidebarNavItem href="/docspendientes" icon={<FaFile />}>
+              Creación de Registro
+            </SidebarNavItem>
+            <SidebarNavItem href="/tipodoc" icon={<FaFileAlt />}>
+              Tipo de Formato
+            </SidebarNavItem>
+            <SidebarNavItem href="/historico" icon={<FaUpload />}>
+              Archivos Cargados
+            </SidebarNavItem>
+          </>
+        )}
       </div>
-      <button
-        type="button"
-        onClick={toggleIsNarrow}
-        className="hidden md:block text-right pr-4 font-bold py-2 hover:bg-gray-700 transition-colors"
-        aria-label="Toggle sidebar width"
-      >
-        <FaAngleLeft className="text-xl" />
-      </button>
-    </aside>
+    </ul>
   );
-}
-
-/* ======================================================
-   Componente Overlay del Sidebar
-   ====================================================== */
-interface SidebarOverlayProps {
-  isShowSidebar: boolean;
-  toggleSidebar: () => void;
-}
-
-export const SidebarOverlay: React.FC<SidebarOverlayProps> = ({ isShowSidebar, toggleSidebar }) => (
-  <div
-    className={classNames(
-      "fixed inset-0 bg-black opacity-50 transition-opacity",
-      {
-        "block": isShowSidebar,
-        "hidden": !isShowSidebar,
-      }
-    )}
-    onClick={toggleSidebar}
-  />
-);
+};
